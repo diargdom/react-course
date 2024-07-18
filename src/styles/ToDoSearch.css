@@ -1,0 +1,25 @@
+.ToDoSearch {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .searchTerm {
+    width: calc(100% - 62px);
+    border: 3px solid #00B4CC;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px;
+    outline: none;
+    color: #9DBFAF;
+    font-size: 24px;
+    text-align: center;
+    font-family: montserrat;
+    
+  }:focus{
+    outline-color: #00B4CC;
+  }::placeholder{
+    color: #a5a5a5;
+    font-family: montserrat;
+    font-weight: 400
+  }
