@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { CreateToDoButton } from "./components/CreateToDoButton";
-import { ToDoItem } from "./components/ToDoItem";
-import { ToDoList } from "./components/ToDoList";
-import { ToDoSearch } from "./components/ToDoSearch";
-import { ToDoTittle } from "./components/ToDoTittle";
 import useLocalStorage from "./hooks/useLocalStorage";
+import AppUi from "./components/AppUi";
 
+// localStorage.removeItem('TODOS_V1')
 // const defaultToDoItem = [
 //   {text: 'Cortar cebolla', completed: true},
 //   {text: 'Tomar el curso de Intro a React.js', completed: false},
@@ -14,16 +11,20 @@ import useLocalStorage from "./hooks/useLocalStorage";
 //   {text: 'LALALALA', completed: false},
 //   {text: 'Usar estados derivados', completed: true},
 // ]
-// localStorage.setItem('ToDoS_V1', JSON.stringify(defaultToDoItem))
-
-//localStorage.removeItem('ToDoS_V1')
+// localStorage.setItem('TODOS_V1', JSON.stringify(defaultToDoItem))
 
 function App() {
-  const [toDo, saveToDos] = useLocalStorage("TODOS_V1", []);
+  const {
+    item: toDo,
+    saveItem: saveToDos,
+    loading,
+    error,
+  } = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = useState("");
 
   const completedToDo = toDo.filter((todo) => !!todo.completed).length;
   const totalToDo = toDo.length;
+
   const searchedToDo = toDo.filter((todo) => {
     const toDoText = todo.text.toLowerCase();
     const searchText = searchValue.toLowerCase();
@@ -47,24 +48,17 @@ function App() {
   };
 
   return (
-    <>
-      <ToDoTittle completed={completedToDo} total={totalToDo} />
-      <ToDoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
-
-      <ToDoList>
-        {searchedToDo.map((todos) => (
-          <ToDoItem
-            key={todos.text}
-            text={todos.text}
-            completed={todos.completed}
-            onCompleted={() => completeToDo(todos.text)}
-            onDelete={() => deleteToDo(todos.text)}
-          />
-        ))}
-      </ToDoList>
-
-      <CreateToDoButton />
-    </>
+    <AppUi
+      loading={loading}
+      error={error}
+      completedToDo={completedToDo}
+      totalToDo={totalToDo}
+      searchValue={searchValue}
+      setSearchValue={setSearchValue}
+      searchedToDo={searchedToDo}
+      completeToDo={completeToDo}
+      deleteToDo={deleteToDo}
+    />
   );
 }
 
