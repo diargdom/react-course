@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { CreateToDoButton } from "./CreateToDoButton";
 import { ToDoItem } from "./ToDoItem";
 import { ToDoList } from "./ToDoList";
@@ -7,27 +7,16 @@ import { ToDoTittle } from "./ToDoTittle";
 import { TodosLoading } from "./TodosLoading";
 import { TodosError } from "./TodosError";
 import { EmptyTodos } from "./EmptyTodos";
+import { ToDoContext } from "./ToDoContext";
+import { ModalTodo } from "./Modal";
 
-function AppUi({
-  loading,
-  error,
-  completedToDo,
-  totalToDo,
-  searchValue,
-  setSearchValue,
-  searchedToDo,
-  completeToDo,
-  deleteToDo,
-}) {
+function AppUi() {
+  const { loading, error, searchedToDo, completeToDo, deleteToDo, openModal } =
+    useContext(ToDoContext);
   return (
     <>
-      <ToDoTittle
-        completed={completedToDo}
-        total={totalToDo}
-        loading={loading}
-      />
-      <ToDoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
-
+      <ToDoTittle />
+      <ToDoSearch />
       <ToDoList>
         {loading && <TodosLoading />}
         {error && <TodosError />}
@@ -45,8 +34,10 @@ function AppUi({
       </ToDoList>
 
       <CreateToDoButton />
+
+      {openModal && <ModalTodo>Pruebas</ModalTodo>}
     </>
   );
 }
 
-export default AppUi;
+export { AppUi };

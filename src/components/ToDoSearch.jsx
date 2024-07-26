@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../styles/ToDoSearch.css";
+import { ToDoContext } from "./ToDoContext";
 
-function ToDoSearch({searchValue, setSearchValue}) {
-  
-  
+function ToDoSearch() {
+  const { searchValue, setSearchValue } = useContext(ToDoContext);
+
   return (
     <>
       <div className="ToDoSearch">
@@ -13,7 +14,7 @@ function ToDoSearch({searchValue, setSearchValue}) {
           placeholder="Filtra los ToDo's..."
           value={searchValue}
           onChange={(event) => {
-            setSearchValue(event.target.value)
+            setSearchValue(event.target.value);
           }}
         />
       </div>

@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../styles/CreateToDoButton.css";
 import { MdAdd } from "react-icons/md";
+import { ToDoContext } from "./ToDoContext";
 
 function CreateToDoButton() {
+  const { handleOpenModal } = useContext(ToDoContext);
   return (
     <>
       <button
         className="CreateButton"
-        onClick={(event) => {
-          console.log("hola");
-          console.log(event);
-          console.log(event.target);
+        onClick={() => {
+          handleOpenModal();
         }}
       >
         <MdAdd />
