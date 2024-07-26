@@ -12,6 +12,7 @@ function TodoProvider({ children }) {
   } = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = useState("");
   const [openModal, setOpenModal] = useState(false);
+  const [newTask, setNewTask] = useState("");
 
   const completedToDo = toDo.filter((todo) => !!todo.completed).length;
   const totalToDo = toDo.length;
@@ -38,9 +39,20 @@ function TodoProvider({ children }) {
     saveToDos(newToDos);
   };
 
+  const addTodo = () => {
+    if (newTask.trim()) {
+      const newToDos = [...toDo, { text: newTask, completed: false }];
+      saveToDos(newToDos);
+      setNewTask("");
+      handleCloseModal();
+    }
+  };
+
   const handleOpenModal = () => setOpenModal(true);
 
   const handleCloseModal = () => setOpenModal(false);
+
+  const handleTaskChange = (event) => setNewTask(event.target.value);
 
   return (
     <>
@@ -58,6 +70,9 @@ function TodoProvider({ children }) {
           openModal,
           handleOpenModal,
           handleCloseModal,
+          addTodo,
+          newTask,
+          handleTaskChange,
         }}
       >
         {children}

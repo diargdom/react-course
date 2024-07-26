@@ -4,16 +4,15 @@ import { ToDoContext } from "./ToDoContext";
 
 function ToDoTittle() {
   const { loading, totalToDo, completedToDo } = useContext(ToDoContext);
-  return loading ? (
-    <h1 className="tittleToDo">Cargando las tareas...</h1>
-  ) : totalToDo === completedToDo ? (
+  return (
     <h1 className="tittleToDo">
-      Felicidades 🎉🎉🎉, haz completado todos los To DO's
-    </h1>
-  ) : (
-    <h1 className="tittleToDo">
-      Haz completado <span>{completedToDo}</span> de <span>{totalToDo}</span> To
-      DO's
+      {loading
+        ? "Cargando las tareas..."
+        : totalToDo === 0
+        ? "No tienes TODOs asignados"
+        : totalToDo === completedToDo
+        ? "Felicidades 🎉🎉🎉, has completado todos los TODOs"
+        : `Haz completado ${completedToDo} de ${totalToDo} TODOs`}
     </h1>
   );
 }

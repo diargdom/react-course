@@ -35,7 +35,7 @@ function AppUi() {
 
       <CreateToDoButton />
 
-      {openModal && <ModalTodo>Pruebas</ModalTodo>}
+      {openModal && <ModalTodo></ModalTodo>}
     </>
   );
 }

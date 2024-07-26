@@ -3,7 +3,7 @@ import React from "react";
 
 function TodosLoading() {
   return (
-    <Box sx={{ width: 820 }}>
+    <Box>
       <Skeleton height={60} />
       <Skeleton animation="wave" height={60} />
       <Skeleton animation="wave" height={60} />
